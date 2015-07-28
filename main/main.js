@@ -9,6 +9,6 @@ require(
         'services/routeResolver',
     ],
     function() {
-        angular.bootstrap(document, ['BALKAM']);
+        angular.bootstrap(document, ['Blog']);
     });
 
