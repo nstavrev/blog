@@ -2,7 +2,7 @@
 
 define(['services/routeResolver'], function () {
 
-    var app = angular.module('BALKAM', ['routeResolverServices', 'ngRoute']);
+    var app = angular.module('Blog', ['routeResolverServices', 'ngRoute']);
 
     app.config(['$routeProvider', 'routeResolverProvider', '$controllerProvider', 
                 '$compileProvider', '$filterProvider', '$locationProvider', '$provide', 
