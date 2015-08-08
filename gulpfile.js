@@ -18,6 +18,10 @@ var watch = require('gulp-watch');
 
 var rename = require("gulp-rename");
 
+var less = require('gulp-less');
+
+var watchLess = require('gulp-watch-less');
+
 var fs = require('fs');
 
 
@@ -37,6 +41,8 @@ var PATHS = {
 	src : {
 		js : {
 			lib : [
+				'./bower_components/jquery/dist/jquery.min.js',
+				'./bower_components/bootstrap/dist/js/bootstrap.min.js',
 				'./bower_components/angular/angular.js',
 				'./bower_components/angular-route/angular-route.js',
 				'./external_components/require.js',
@@ -46,7 +52,11 @@ var PATHS = {
 		},
 		css : {
 			lib : [
+				'./bower_components/bootstrap/dist/css/bootstrap.min.css',
 				'./stylesheets/**/*.css'
+			],
+			less : [
+				'./stylesheets/less/**/*.less'
 			]
 		}
 	},
@@ -60,6 +70,7 @@ var PATHS = {
 			lib : 'public/stylesheets',
 			concatCssFileName : randomString(".css")
 		},
+		less : "stylesheets",
 		ngApp : "./public/javascripts/app"
 	},
 	ngApp : {
@@ -126,6 +137,7 @@ gulp.task('build.lib.dev.js', function() {
 	return gulp.src(PATHS.src.js.lib)
 		.pipe(gulp.dest(PATHS.dest.js.lib));
 });
+
 
 gulp.task('build.lib.dev.css', function() {
 	return gulp.src(PATHS.src.css.lib)
@@ -230,8 +242,17 @@ gulp.task('watch.css', function(){
 		.pipe(gulp.dest(PATHS.dest.css.lib))
 });
 
+gulp.task('less.dev', function(){
+	console.log(PATHS.dest.css.lib);
 
-gulp.task('watch', ['watch.ngApp', 'watch.css']);
+	return gulp.src(PATHS.src.css.less[0])
+	.pipe(watchLess(PATHS.src.css.less[0]))
+	.pipe(watch(PATHS.src.css.less))
+    .pipe(less())
+    .pipe(gulp.dest(PATHS.dest.less));
+});
+
+gulp.task('watch', ['watch.ngApp', 'watch.css', 'less.dev']);
 
 //end watching tasks
 
