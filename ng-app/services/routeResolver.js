@@ -34,14 +34,14 @@ define([], function () {
 
         this.route = function (routeConfig) {
 
-            var resolve = function (baseName, path) {
+            var resolve = function (baseName, viewName) {
                 // if (!path) path = '';
 
                 var routeDef = {};
 
                 routeDef.templateUrl = function(params) {
 
-                    var directory = routeConfig.getViewsDirectory() + baseName +  ".html?random=" + Math.random();
+                    var directory = routeConfig.getViewsDirectory() + baseName + "/" + viewName + ".html?random=" + Math.random();
 
                     return directory;
                    

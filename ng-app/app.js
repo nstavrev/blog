@@ -24,8 +24,8 @@ define(['services/routeResolver'], function () {
         var route = routeResolverProvider.route;
 
         $routeProvider
-            .when('/', route.resolve('home'))
-            .when('/about', route.resolve('about'));
+            .when('/', route.resolve('home', 'home'))
+            .when('/about', route.resolve('about', 'about'));
 
         $locationProvider.html5Mode(true);
         
